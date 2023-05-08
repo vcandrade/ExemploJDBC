@@ -11,6 +11,14 @@ public class Curso {
 	
 	}
 
+	public Curso(int codigo, String nome, String periodo, int duracao) {
+		
+		this.codigo = codigo;
+		this.nome = nome;
+		this.periodo = periodo;
+		this.duracao = duracao;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -41,5 +49,10 @@ public class Curso {
 
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
+	}
+
+	@Override
+	public String toString() {
+		return this.getNome();
 	}
 }
