@@ -18,7 +18,7 @@ public class CursoDAO {
 		this.conn = conn;
 	}
 
-	public void cadastrar(Curso curso) throws SQLException {
+	public int cadastrar(Curso curso) throws SQLException {
 
 		PreparedStatement st = null;
 
@@ -30,7 +30,7 @@ public class CursoDAO {
 			st.setString(2, curso.getPeriodo());
 			st.setInt(3, curso.getDuracao());
 
-			st.executeUpdate();
+			return st.executeUpdate();
 
 		} finally {
 
@@ -109,7 +109,7 @@ public class CursoDAO {
 		}
 	}
 
-	public void atualizar(Curso curso) throws SQLException {
+	public int atualizar(Curso curso) throws SQLException {
 
 		PreparedStatement st = null;
 
@@ -121,7 +121,7 @@ public class CursoDAO {
 			st.setInt(2, curso.getDuracao());
 			st.setInt(3, curso.getCodigo());
 
-			st.executeUpdate();
+			return st.executeUpdate();
 
 		} finally {
 
@@ -140,9 +140,7 @@ public class CursoDAO {
 
 			st.setInt(1, codigo);
 
-			int linhasManipuladas = st.executeUpdate();
-			
-			return linhasManipuladas;
+			return st.executeUpdate();
 
 		} finally {
 

@@ -1,24 +1,28 @@
 package dao;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.junit.jupiter.api.Test;
+
 public class BancoDadosTeste {
 
-	public static void main(String[] args) {
+	@Test
+	public void conectarTeste() throws SQLException, IOException {
 
-		try {
-			
-			Connection conn = BancoDados.conectar();
-			System.out.println("Conexão estabelecida.");
-			
-			BancoDados.desconectar();
-			System.out.println("Conexão finalizada.");
+		Connection conn = BancoDados.conectar();
+		assertNotNull(conn);
+	}
 
-		} catch (SQLException | IOException e) {
-		
-			System.out.println(e.getMessage());
-		}
+	@Test
+	public void desconectarTeste() throws SQLException, IOException {
+
+		Connection conn = BancoDados.conectar();
+		conn = BancoDados.desconectar();
+
+		assertNull(conn);
 	}
 }

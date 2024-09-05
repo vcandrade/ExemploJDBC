@@ -19,7 +19,7 @@ public class AlunoDAO {
 		this.conn = conn;
 	}
 
-	public void cadastrar(Aluno aluno) throws SQLException {
+	public int cadastrar(Aluno aluno) throws SQLException {
 
 		PreparedStatement st = null;
 
@@ -36,7 +36,7 @@ public class AlunoDAO {
 			st.setInt(6, aluno.getPeriodo());
 			st.setDouble(7, aluno.getCoeficiente());
 
-			st.executeUpdate();
+			return st.executeUpdate();
 
 		} finally {
 
@@ -121,7 +121,7 @@ public class AlunoDAO {
 		}
 	}
 
-	public void atualizar(Aluno aluno) throws SQLException {
+	public int atualizar(Aluno aluno) throws SQLException {
 
 		PreparedStatement st = null;
 
@@ -137,7 +137,7 @@ public class AlunoDAO {
 			st.setDouble(6, aluno.getCoeficiente());
 			st.setInt(7, aluno.getRegistroAcademico());
 
-			st.executeUpdate();
+			return st.executeUpdate();
 
 		} finally {
 
@@ -156,9 +156,7 @@ public class AlunoDAO {
 
 			st.setInt(1, ra);
 
-			int linhasManipuladas = st.executeUpdate();
-			
-			return linhasManipuladas;
+			return st.executeUpdate();
 
 		} finally {
 

@@ -25,13 +25,15 @@ public class BancoDados {
 		return conn;
 	}
 
-	public static void desconectar() throws SQLException {
+	public static Connection desconectar() throws SQLException {
 
 		if (conn != null) {
 
 			conn.close();
 			conn = null;
 		}
+		
+		return conn;
 	}
 
 	private static Properties carregarPropriedades() throws IOException {
