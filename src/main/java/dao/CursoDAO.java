@@ -25,7 +25,8 @@ public class CursoDAO implements DAO<CursoDTO, Integer> {
 
 		try {
 
-			st = conn.prepareStatement("insert into curso (nome, periodo, duracao) values (?, ?, ?)");
+			st = conn.prepareStatement("insert into curso "
+					+ "(nome, periodo, duracao) values (?, ?, ?)");
 
 			st.setString(1, entidade.getNome());
 			st.setString(2, entidade.getPeriodo());
@@ -119,7 +120,8 @@ public class CursoDAO implements DAO<CursoDTO, Integer> {
 
 		try {
 
-			st = conn.prepareStatement("update curso set periodo = ?, duracao = ? where codigo = ?");
+			st = conn.prepareStatement("update curso "
+					+ "set periodo = ?, duracao = ? where codigo = ?");
 
 			st.setString(1, entidade.getPeriodo());
 			st.setInt(2, entidade.getDuracao());

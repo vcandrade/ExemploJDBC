@@ -11,13 +11,14 @@ public class CursoDAOTeste {
 
 	public static void cadastrarCursoTeste() throws SQLException, IOException {
 
-		CursoDTO curso = new CursoDTO();
-		curso.setNome("Engenharia Mecânica");
-		curso.setPeriodo("Integral");
-		curso.setDuracao(10);
+		CursoDTO entidade = new CursoDTO();
+		entidade.setNome("Automação Industrial");
+		entidade.setPeriodo("Integral");
+		entidade.setDuracao(6);
 
 		Connection conn = BancoDados.conectar();
-		int resultado = new CursoDAO(conn).cadastrar(curso);
+		CursoDAO cursoDAO = new CursoDAO(conn);
+		int resultado = cursoDAO.cadastrar(entidade);
 
 		if (resultado > 0) {
 
@@ -32,34 +33,45 @@ public class CursoDAOTeste {
 	public static void buscarTodosCursosTeste() throws SQLException, IOException {
 
 		Connection conn = BancoDados.conectar();
-		List<CursoDTO> listaCursos = new CursoDAO(conn).buscarTodos();
+		CursoDAO cursoDAO = new CursoDAO(conn);
+		List<CursoDTO> listaCursos = cursoDAO.buscarTodos();
 
 		for (CursoDTO cursoDTO : listaCursos) {
-		
+
 			System.out.println(cursoDTO);
 		}
 	}
 	
 	public static void buscarPorChaveCursoTeste() throws SQLException, IOException {
-		
-		int codigoCurso = 1;
-		
+
+		int codigoCurso = 5;
+
 		Connection conn = BancoDados.conectar();
-		CursoDTO cursoDTO = new CursoDAO(conn).buscarPorChave(codigoCurso);
-		
-		System.out.println(cursoDTO);
+		CursoDAO cursoDAO = new CursoDAO(conn);
+		CursoDTO cursoDTO = cursoDAO.buscarPorChave(codigoCurso);
+
+		if (cursoDTO != null) {
+			
+			System.out.println(cursoDTO);
+
+		} else {
+			
+			System.out.println("Nenhum curso encontrado.");
+		}
 	}
+
 	
 	public static void atualizarCursoTeste() throws SQLException, IOException {
 		
-		CursoDTO cursoDTO = new CursoDTO();
+		CursoDTO entidade = new CursoDTO();
 		
-		cursoDTO.setCodigo(3);
-		cursoDTO.setPeriodo("Diurno");
-		cursoDTO.setDuracao(8);
+		entidade.setCodigo(15);
+		entidade.setPeriodo("Diurno");
+		entidade.setDuracao(8);
 		
 		Connection conn = BancoDados.conectar();
-		int resultado = new CursoDAO(conn).atualizar(cursoDTO);
+		CursoDAO cursoDAO = new CursoDAO(conn);
+		int resultado = cursoDAO.atualizar(entidade);
 		
 		if (resultado > 0) {
 			
@@ -72,22 +84,23 @@ public class CursoDAOTeste {
 	}
 	
 	public static void excluirCursoTeste() throws SQLException, IOException {
-		
+
 		int codigoCurso = 2;
-		
+
 		Connection conn = BancoDados.conectar();
-		int resultado = new CursoDAO(conn).excluir(codigoCurso);
-		
+		CursoDAO cursoDAO = new CursoDAO(conn);
+		int resultado = cursoDAO.excluir(codigoCurso);
+
 		if (resultado > 0) {
-			
+
 			System.out.println("Curso excluído com sucesso.");
-			
+
 		} else {
-			
+
 			System.out.println("Erro ao excluir o curso.");
 		}
 	}
-
+	
 	public static void main(String[] args) {
 
 		try {
